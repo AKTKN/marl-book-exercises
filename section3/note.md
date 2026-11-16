@@ -17,24 +17,24 @@ $$
 であるとします。
 このとき、自分が観測する報酬関数は
 $$
- R(s,a)= \\begin{cases} -1 & (a=R),\\\\\\ +3 & (a=P),\\\\\\ -2 & (a=S). \\end{cases} 
+ R(s,a)= \begin{cases} -1 & (a=R),\\\ +3 & (a=P),\\\ -2 & (a=S). \end{cases} 
 $$
 状態遷移は任意の行動について $T(s\mid s,a)=1$ です。
 割引率 $0\leq\gamma<1$ の無限期間問題を考えると、Bellman最適方程式は
 $$
- Q^*(s,a)=R(s,a)+\gamma\max_{a'}Q^*(s,a') 
+ Q^\*(s,a)=R(s,a)+\gamma\max\_{a'}Q^\*(s,a') 
 $$
 となります。したがって、
 $$
- \\begin{aligned} Q^*(s,R)&=-1+\gamma V^*(s),\\\\\\ Q^*(s,P)&=3+\gamma V^*(s),\\\\\\ Q^*(s,S)&=-2+\gamma V^*(s). \\end{aligned} 
+ \begin{aligned} Q^\*(s,R)&=-1+\gamma V^\*(s),\\\ Q^\*(s,P)&=3+\gamma V^\*(s),\\\ Q^\*(s,S)&=-2+\gamma V^\*(s). \end{aligned} 
 $$
-ここで $V^*(s)=\max_a Q^*(s,a)$ なので、
+ここで $V^\*(s)=\max_a Q^\*(s,a)$ なので、
 $$
- V^*(s)=3+\gamma V^*(s) =\\frac{3}{1-\gamma}. 
+ V^\*(s)=3+\gamma V^\*(s) =\frac{3}{1-\gamma}. 
 $$
 従って最適方策は
 $$
- \pi_1^*(P\mid s)=1 
+ \pi_1^\*(P\mid s)=1 
 $$
 
 となり、常にパーを選択します。
@@ -42,7 +42,7 @@ $$
 Q-learningでは、各試行から得られる報酬を利用して
 
 $$
- Q(s,a_t)\leftarrow Q(s,a_t)+\alpha_t \left[ r_t+\gamma\max_{a'}Q(s,a')-Q(s,a_t) \right] 
+ Q(s,a_t)\leftarrow Q(s,a_t)+\alpha_t \left[ r_t+\gamma\max\_{a'}Q(s,a')-Q(s,a_t) \right] 
 $$
 
 を繰り返します。相手の方策 $\pi_2$ を直接知る必要はありません。
@@ -123,13 +123,13 @@ $$
 
 #### 3. 報酬関数を設計して、望ましい状態をNash equilibriumにする方法
 これも実際に研究される戦略です。ゲーム理論では *Mechanism Design* や *Incentive Design*、関連する枠組みとして *Potential Games* が存在します。
-例えば、2-agentのnormal-form gameで、あるjoint action $\mathbf a^*$ を実現したいとします。
+例えば、2-agentのnormal-form gameで、あるjoint action $\mathbf a^\*$ を実現したいとします。
 そのjoint actionがNash equilibriumであるための条件は、
 $$
- \forall i,\ \forall a_i\in A_i: \quad R_i(\mathbf a^*)\geq R_i(a_i,\mathbf a^*\_{-i}) 
+ \forall i,\ \forall a_i\in A_i: \quad R_i(\mathbf a^\*)\geq R_i(a_i,\mathbf a^\*\_{-i}) 
 $$
 です。
-つまり、他のagentが $\mathbf a^*\_{-i}$ を選んでいるとき、どのagentも自分だけ行動を変える動機を持たないように報酬を設計します。
+つまり、他のagentが $\mathbf a^\*\_{-i}$ を選んでいるとき、どのagentも自分だけ行動を変える動機を持たないように報酬を設計します。
 興味深いことに、共通報酬を与えるだけでも、共通報酬の大域的最大点は必ずNash equilibriumになります。
 しかし、次のような共通報酬ゲームを考えてください。
 
